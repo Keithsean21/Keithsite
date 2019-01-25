@@ -3,6 +3,8 @@
 <html lang="en">
 <html>
 <head>
+
+
 	<title></title>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -199,19 +201,50 @@
   </div>
 </div>
 
-	<div class id="boxes">
-        <div class="box">
-					<iframe width="280" height="157.5" src="https://www.youtube.com/embed/I9DLRoYXzW8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-        </div>
-        <div class="box">
-					<iframe width="280" height="157.5" src="https://www.youtube.com/embed/7iHJnyZVtbE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="box">
-					<iframe width="280" height="157.5" src="https://www.youtube.com/embed/Aun0GPIC0Bo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    	</div>
-	</div>
+<div class="container">
+    <div class="carousel">
+        <div class="carousel-prev"></div>
+        <div class="carousel-next"></div>
+        <ul class="carousel-pagination">
+            <li class="carousel-bullet"></li>
+            <li class="carousel-bullet"></li>
+            <li class="carousel-bullet"></li>
+            <li class="carousel-bullet"></li>
+            <li class="carousel-bullet"></li>
+        </ul>
+        <ul class="carousel-container">
+            <li class="carousel-item">
+                <div class="item-1">
+									<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Aun0GPIC0Bo?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+								</div>
+            </li>
+            <li class="carousel-item">
+                <div class="item-2">
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/7iHJnyZVtbE?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+								</div>
+            </li>
+            <li class="carousel-item">
+                <div class="item-3">
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/I9DLRoYXzW8?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+								</div>
+            </li>
+            <li class="carousel-item">
+                <div class="item-4">
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/lNZNzcmwAC8?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+								</div>
+            </li>
+            <li class="carousel-item">
+                <div class="item-5">
+									<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FD4d0gQsl_E?rel=1?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+								</div>
+            </li>
+        </ul>
+    </div>
+</div>
 
 </section>
 
@@ -596,6 +629,45 @@
  span.onclick = function() {
     modal.style.display = "none";
  }
+
+
+
+ var carousel = document.querySelector('.carousel');
+var container = carousel.querySelector('.carousel-container');
+var prevBtn = carousel.querySelector('.carousel-prev');
+var nextBtn = carousel.querySelector('.carousel-next');
+var pagination = carousel.querySelector('.carousel-pagination');
+var bullets = [].slice.call(carousel.querySelectorAll('.carousel-bullet'));
+var totalItems = container.querySelectorAll('.carousel-item').length;
+var percent = (100 / totalItems);
+var currentIndex = 0;
+
+function next() {
+    slideTo(currentIndex + 1);
+}
+
+function prev() {
+    slideTo(currentIndex - 1);
+}
+
+function slideTo(index) {
+    index = index < 0 ? totalItems - 1 : index >= totalItems ? 0 : index;
+    container.style.WebkitTransform = container.style.transform = 'translate(-' + (index * percent) + '%, 0)';
+    bullets[currentIndex].classList.remove('active-bullet');
+    bullets[index].classList.add('active-bullet');
+    currentIndex = index;
+}
+
+bullets[currentIndex].classList.add('active-bullet');
+prevBtn.addEventListener('click', prev, false);
+nextBtn.addEventListener('click', next, false);
+
+pagination.addEventListener('click', function(e) {
+    var index = bullets.indexOf(e.target);
+    if (index !== -1 && index !== currentIndex) {
+        slideTo(index);
+    }
+}, false);
  </script>
 
 
